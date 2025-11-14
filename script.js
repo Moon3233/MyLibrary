@@ -54,11 +54,61 @@ function generateBookId() {
 }
 
 /**
+ * Crée l'élément HTML pour un livre
+ * @param {Book} book - Objet livre à afficher
+ * @returns {HTMLElement} Élément HTML représentant le livre
+ */
+function createBookElement(book) {
+    const bookCard = document.createElement('div');
+    bookCard.className = 'book-card';
+    bookCard.dataset.bookId = book.id;
+
+    const bookTitle = document.createElement('h3');
+    bookTitle.className = 'book-title';
+    bookTitle.textContent = book.title;
+
+    bookCard.appendChild(bookTitle);
+
+    return bookCard;
+}
+
+/**
+ * Affiche tous les livres dans la liste
+ */
+function displayBooks() {
+    const booksListContainer = document.getElementById('books-list');
+    if (!booksListContainer) {
+        console.error('Élément books-list introuvable');
+        return;
+    }
+
+    const books = getBooks();
+
+    // Vider le conteneur
+    booksListContainer.innerHTML = '';
+
+    // Afficher l'état vide si aucun livre
+    if (books.length === 0) {
+        const emptyState = document.createElement('div');
+        emptyState.className = 'empty-state';
+        emptyState.textContent = 'Aucun livre dans votre librairie. Ajoutez-en un pour commencer !';
+        booksListContainer.appendChild(emptyState);
+        return;
+    }
+
+    // Afficher chaque livre
+    books.forEach(book => {
+        const bookElement = createBookElement(book);
+        booksListContainer.appendChild(bookElement);
+    });
+}
+
+/**
  * Initialise l'application au chargement de la page
  */
 function init() {
     console.log('Application de librairie initialisée');
-    // La logique d'affichage sera ajoutée dans les branches suivantes
+    displayBooks();
 }
 
 // Initialisation au chargement de la page
