@@ -157,6 +157,26 @@ main {
     box-shadow: var(--shadow);
 }
 
+.btn-delete {
+    background-color: var(--danger-color);
+    color: white;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    line-height: 1;
+}
+
+.btn-delete:hover {
+    background-color: #c0392b;
+    transform: translateY(-1px) scale(1.1);
+    box-shadow: var(--shadow);
+}
+
 /* Styles pour les messages d'état vide */
 .empty-state {
     text-align: center;
@@ -575,6 +595,51 @@ main {
 
 .modal-actions .btn {
     min-width: 120px;
+}
+
+.modal-confirm {
+    max-width: 500px;
+}
+
+.confirm-message {
+    padding: 1.5rem 0;
+    text-align: center;
+}
+
+.confirm-message p {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin: 0;
+    line-height: 1.6;
+}
+
+.btn-icon {
+    display: inline-block;
+    margin-right: 0.5rem;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.btn-confirm {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-confirm:hover {
+    background-color: #45b869;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
+}
+
+.btn-cancel-delete {
+    background-color: #6c757d;
+    color: white;
+}
+
+.btn-cancel-delete:hover {
+    background-color: #5a6268;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
 }
 
 /* Responsive */

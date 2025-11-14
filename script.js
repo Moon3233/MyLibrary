@@ -105,6 +105,14 @@ function createBookElement(book) {
     editButton.addEventListener('click', () => openEditModal(book));
     bookActions.appendChild(editButton);
 
+    const deleteButton = document.createElement('button');
+    deleteButton.className = 'btn btn-delete';
+    deleteButton.innerHTML = '🗑️';
+    deleteButton.setAttribute('aria-label', `Supprimer ${book.title}`);
+    deleteButton.setAttribute('title', 'Supprimer');
+    deleteButton.addEventListener('click', () => openDeleteConfirmModal(book.id));
+    bookActions.appendChild(deleteButton);
+
     bookContent.appendChild(bookActions);
     bookCard.appendChild(bookContent);
 
@@ -618,8 +626,50 @@ function initEventListeners() {
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             closeEditModal();
+            closeDeleteConfirmModal();
         }
     });
+
+    // Gestion du modal de confirmation de suppression
+    const deleteConfirmModal = document.getElementById('delete-confirm-modal');
+    if (deleteConfirmModal) {
+        // Fermer en cliquant sur le fond
+        deleteConfirmModal.addEventListener('click', function(e) {
+            if (e.target === deleteConfirmModal) {
+                closeDeleteConfirmModal();
+            }
+        });
+
+        // Bouton de confirmation
+        const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
+        if (confirmDeleteBtn) {
+            confirmDeleteBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const bookId = deleteConfirmModal.dataset.bookId;
+                if (bookId) {
+                    deleteBook(bookId);
+                }
+            });
+        }
+
+        // Bouton d'annulation
+        const cancelDeleteBtn = document.getElementById('cancel-delete-btn');
+        if (cancelDeleteBtn) {
+            cancelDeleteBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                closeDeleteConfirmModal();
+            });
+        }
+
+        // Fermer avec le bouton X
+        const closeDeleteModalBtn = deleteConfirmModal.querySelector('.modal-close');
+        if (closeDeleteModalBtn) {
+            closeDeleteModalBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                closeDeleteConfirmModal();
+            });
+        }
+    }
 }
 
 /**
@@ -781,6 +831,67 @@ async function updateBook(bookId, title, author, coverImageDataURL = '') {
     closeEditModal();
 
     return true;
+}
+
+/**
+ * Ouvre le modal de confirmation de suppression
+ * @param {string} bookId - ID du livre à supprimer
+ */
+function openDeleteConfirmModal(bookId) {
+    const books = getBooks();
+    const book = books.find(b => b.id === bookId);
+    
+    if (!book) {
+        console.error('Livre introuvable');
+        return;
+    }
+
+    const modal = document.getElementById('delete-confirm-modal');
+    const confirmText = document.getElementById('delete-confirm-text');
+    
+    if (!modal || !confirmText) return;
+
+    // Afficher le message de confirmation
+    confirmText.textContent = `Êtes-vous sûr de vouloir supprimer "${book.title}" de votre librairie ?`;
+    
+    // Stocker l'ID du livre à supprimer dans le modal
+    modal.dataset.bookId = bookId;
+    
+    // Afficher le modal
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+/**
+ * Ferme le modal de confirmation de suppression
+ */
+function closeDeleteConfirmModal() {
+    const modal = document.getElementById('delete-confirm-modal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+        delete modal.dataset.bookId;
+    }
+}
+
+/**
+ * Supprime un livre de la librairie
+ * @param {string} bookId - ID du livre à supprimer
+ */
+function deleteBook(bookId) {
+    const books = getBooks();
+    
+    // Supprimer le livre
+    const updatedBooks = books.filter(b => b.id !== bookId);
+    
+    // Sauvegarder
+    saveBooks(updatedBooks);
+    
+    // Rafraîchir l'affichage
+    displayBooks();
+    
+    // Fermer le modal
+    closeDeleteConfirmModal();
 }
 
 /**
