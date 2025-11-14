@@ -1,0 +1,44 @@
+# Fichiers système
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Éditeurs et IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Fichiers temporaires
+*.tmp
+*.temp
+*.log
+*.cache
+
+# Fichiers de sauvegarde
+*.bak
+*.backup
+*~
+
+# Fichiers de système d'exploitation
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Fichiers de configuration locaux (si nécessaire plus tard)
+.env.local
+.env.*.local
+

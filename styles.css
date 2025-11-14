@@ -1,0 +1,98 @@
+/* Reset et variables CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #4a90e2;
+    --secondary-color: #50c878;
+    --danger-color: #e74c3c;
+    --text-color: #333;
+    --bg-color: #f5f5f5;
+    --card-bg: #ffffff;
+    --border-color: #e0e0e0;
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+main {
+    width: 100%;
+}
+
+.books-section {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+}
+
+.books-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+}
+
+.books-list {
+    display: grid;
+    gap: 1rem;
+}
+
+/* Styles pour les messages d'état vide */
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: #999;
+    font-size: 1.1rem;
+}
+
+.empty-state::before {
+    content: "📖";
+    display: block;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .books-section {
+        padding: 1.5rem;
+    }
+}
+
