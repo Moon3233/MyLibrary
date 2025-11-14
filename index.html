@@ -13,6 +13,59 @@
         </header>
 
         <main>
+            <section class="add-book-section">
+                <h2>Ajouter un livre</h2>
+                <form id="add-book-form" class="add-book-form" novalidate>
+                    <div class="form-group">
+                        <label for="book-title">Titre du livre *</label>
+                        <span class="error-message" id="title-error"></span>
+                        <input 
+                            type="text" 
+                            id="book-title" 
+                            name="title" 
+                            placeholder="Ex: Le Seigneur des Anneaux"
+                            required
+                            maxlength="200"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="book-author">Nom de l'auteur *</label>
+                        <span class="error-message" id="author-error"></span>
+                        <input 
+                            type="text" 
+                            id="book-author" 
+                            name="author" 
+                            placeholder="Ex: J.R.R. Tolkien"
+                            required
+                            maxlength="100"
+                        >
+                    </div>
+                    <div class="form-group">
+                        <label for="book-cover">Image de couverture *</label>
+                        <span class="error-message" id="cover-error"></span>
+                        <div class="file-upload-container">
+                            <input 
+                                type="file" 
+                                id="book-cover" 
+                                name="coverImage" 
+                                accept="image/*"
+                                class="file-input"
+                            >
+                            <label for="book-cover" class="file-label">
+                                <span class="file-label-text">📷 Choisir une image</span>
+                                <span class="file-label-icon">📁</span>
+                            </label>
+                            <div id="cover-preview" class="cover-preview" style="display: none;">
+                                <img id="preview-image" src="" alt="Aperçu de la couverture">
+                                <button type="button" id="remove-preview" class="remove-preview-btn" aria-label="Supprimer l'image">×</button>
+                            </div>
+                        </div>
+                        <small class="form-hint">Formats acceptés : JPG, PNG, GIF, WebP</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ajouter le livre</button>
+                </form>
+            </section>
+
             <section class="books-section">
                 <h2>Mes Livres</h2>
                 <div id="books-list" class="books-list">
@@ -20,6 +73,69 @@
                 </div>
             </section>
         </main>
+    </div>
+
+    <!-- Modal de modification -->
+    <div id="edit-book-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Modifier le livre</h2>
+                <button class="modal-close" aria-label="Fermer">&times;</button>
+            </div>
+            <form id="edit-book-form" class="add-book-form" novalidate>
+                <input type="hidden" id="edit-book-id">
+                <div class="form-group">
+                    <label for="edit-book-title">Titre du livre *</label>
+                    <span class="error-message" id="edit-title-error"></span>
+                    <input 
+                        type="text" 
+                        id="edit-book-title" 
+                        name="title" 
+                        placeholder="Ex: Le Seigneur des Anneaux"
+                        required
+                        maxlength="200"
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="edit-book-author">Nom de l'auteur *</label>
+                    <span class="error-message" id="edit-author-error"></span>
+                    <input 
+                        type="text" 
+                        id="edit-book-author" 
+                        name="author" 
+                        placeholder="Ex: J.R.R. Tolkien"
+                        required
+                        maxlength="100"
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="edit-book-cover">Image de couverture *</label>
+                    <span class="error-message" id="edit-cover-error"></span>
+                    <div class="file-upload-container">
+                        <input 
+                            type="file" 
+                            id="edit-book-cover" 
+                            name="coverImage" 
+                            accept="image/*"
+                            class="file-input"
+                        >
+                        <label for="edit-book-cover" class="file-label">
+                            <span class="file-label-text">📷 Choisir une image</span>
+                            <span class="file-label-icon">📁</span>
+                        </label>
+                        <div id="edit-cover-preview" class="cover-preview" style="display: none;">
+                            <img id="edit-preview-image" src="" alt="Aperçu de la couverture">
+                            <button type="button" id="remove-edit-preview" class="remove-preview-btn" aria-label="Supprimer l'image">×</button>
+                        </div>
+                    </div>
+                    <small class="form-hint">Formats acceptés : JPG, PNG, GIF, WebP</small>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-edit-btn">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <script src="script.js"></script>
